@@ -1,3 +1,33 @@
+/**************   PCRE接口介绍 *******************************
+（1）. pcre_compile
+ 
+pcre *pcre_compile(const char *pattern, int options,
+            const char **errptr, int *erroffset,
+            const unsigned char *tableptr);
+功能：编译指定的正则表达式
+参数：pattern, 输入参数，将要被编译的字符串形式的正则表达式
+      options, 输入参数，用来指定编译时的一些选项
+      errptr, 输出参数，用来输出错误信息
+      erroffset, 输出参数，pattern中出错位置的偏移量
+      tableptr, 输入参数，用来指定字符表，一般情况用NULL, 使用缺省的字符表
+返回值：被编译好的正则表达式的pcre内部表示结构
+ 
+（2）. pcre_exec
+ 
+int pcre_exec(const pcre *code, const pcre_extra *extra,
+            const char *subject, int length, int startoffset,
+            int options, int *ovector, int ovecsize);
+功能：用来检查某个字符串是否与指定的正则表达式匹配
+参数： code, 输入参数，用pcre_compile编译好的正则表达结构的指针
+      extra, 输入参数，用来向pcre_exec传一些额外的数据信息的结构的指针
+      subject, 输入参数，要被用来匹配的字符串
+      length, 输入参数， 要被用来匹配的字符串的指针
+      startoffset, 输入参数，用来指定subject从什么位置开始被匹配的偏移量
+      options, 输入参数， 用来指定匹配过程中的一些选项
+      ovector, 输出参数，用来返回匹配位置偏移量的数组
+      ovecsize, 输入参数， 用来返回匹配位置偏移量的数组的最大大小
+返回值：匹配成功返回非负数，没有匹配返回负数
+**********************************************************/
 #include <pcre.h>
 #include <stdio.h>
 #include <stdlib.h>
